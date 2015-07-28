@@ -10,7 +10,7 @@ class IncomingController < ApplicationController
 
     # Find the user by using params[:sender]
 
-    @user = User.find_by(email: params[sender])
+    @user = User.find_by(email: params[:sender])
     
     # Find the topic by using params[:subject]
     @topic = Topic.find_by(user_id: @user, title: params[:subject])
