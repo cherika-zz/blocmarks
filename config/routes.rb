@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   resources :users
 
+  post :incoming, to: 'incoming#create'
+
   root :to => "welcome#index"
 end
