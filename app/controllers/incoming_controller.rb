@@ -26,7 +26,7 @@ class IncomingController < ApplicationController
     @topic = Topic.new(user_id: @user, title: params[:title]) if @topic.nil?
 
     # Now that you're sure you have a valid user and topic, build and save a new bookmark
-    @bookmark = Bookmark.create(Bookmark.setEmbedly(params['body-plain']))
+    @bookmark = Bookmark.create((params['body-plain']))
     @bookmark.update_attributes(topic_id: @topic_id)
 
     # You put the message-splitting and business
