@@ -26,7 +26,7 @@ class IncomingController < ApplicationController
     @topic = Topic.new(user_id: @user.id, title: params[:title]) if @topic.nil?
 
     # Now that you're sure you have a valid user and topic, build and save a new bookmark
-    bookmark = Bookmark.new(url: params["stripped-text"])
+    @bookmark = Bookmark.new(url: params["stripped-text"])
     @bookmark.topic = @topic
     @bookmark.user  = @user
     @bookmark.save
