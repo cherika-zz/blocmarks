@@ -11,19 +11,15 @@ class IncomingController < ApplicationController
     # Find the user by using params[:sender]
 
     @user = User.where(email: params['sender']).take
+    # Check if user is nil, if so, create and save a new user
+    @user = User.create(email: params[:sender], password: "#{params['Subject']}_blocmarks") if @user.nil?
     
     # Find the topic by using params[:subject]
-    @topic = Topic.where(title: params['subject']).take
+    @topic = Topic.where(title: params['Subject']).take
     
-    # Assign the url to a variable after retreiving it from params["body-plain"]
-    @url = "http://#{params["body-plain"]}"
-
-    # Check if user is nil, if so, create and save a new user
-    @user = User.create(email: params[:sender], password: "#{params[:title]}_blocmarks") if @user.nil?
-
 
     # Check if the topic is nil, if so, create and save a new topic
-    @topic = Topic.new(user_id: @user.id, title: params[:title]) if @topic.nil?
+    @topic = Topic.new(user_id: @user.id, title: params['Subject']) if @topic.nil?
 
     # Now that you're sure you have a valid user and topic, build and save a new bookmark
     @bookmark = Bookmark.new(url: params["stripped-text"])
