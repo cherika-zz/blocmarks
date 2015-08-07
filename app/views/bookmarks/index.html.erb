@@ -1,0 +1,15 @@
+<h1>Bookmarks<h2>
+
+<div class="row">
+  <div class="col-md-8">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to bookmark.topic.title, topic_bookmarks_path %>
+          </h4>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>  
