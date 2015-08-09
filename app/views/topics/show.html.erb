@@ -9,6 +9,8 @@
         <div class="media-body">
           <h4 class="media-heading">
             <%= link_to bookmark.url, bookmark.url %>
+            <%= link_to "Delete Bookmark", topic_bookmark_path(@topic, bookmark), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+            <%= link_to "Edit Bookmark", edit_topic_bookmark_path(@topic, bookmark), class: 'btn btn-success' %>
           </h4>
         </div>
       </div>
@@ -18,3 +20,11 @@
 
 
 <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
+
+<p>Create new bookmark</p>
+<%= form_for [@topic, @bookmark], method: :new do |f| %>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+
+  <%= f.submit "Save" %>
+<% end %>
