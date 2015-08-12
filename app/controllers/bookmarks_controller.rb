@@ -11,12 +11,12 @@ class BookmarksController < ApplicationController
 
   def create
     @topic = Topic.find(params[:topic_id])
-    @topic.user = current_user
-    @bookmarks = @topic.bookmarks
-
+    # nested hash
     @bookmark = @topic.bookmarks.build(params.require(:bookmark).permit(:url))
     @bookmark.user = current_user
+
     authorize @bookmark
+
     if @bookmark.save
       flash[:notice] = "Bookmark was saved successfully."
       redirect_to @topic
@@ -37,11 +37,10 @@ class BookmarksController < ApplicationController
 
   def update
     @topic = Topic.find(params[:topic_id])
-    @topic.user = current_user
-    @bookmarks = @topic.bookmarks
-
     @bookmark = @topic.bookmarks.find(params[:id])
+
     authorize @bookmark
+
     if @bookmark.update_attributes(params.require(:bookmark).permit(:url))
       flash[:notice] = "Bookmark was updated successfully."
       redirect_to @topic
